@@ -1,6 +1,6 @@
 # Publish Tabs
  
-Version: 1.0   
+Version: 0.9   
 Author: Nick Dunn  
 Build Date: 2010-08-20  
 Requirements: Symphony 2.2*
@@ -25,4 +25,4 @@ When you add a Publish Tab field to a section, any fields that appear *after* th
 
 ## Changelog
 
-**1.0** initial release
+**0.9** initial public release
