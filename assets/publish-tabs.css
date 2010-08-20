@@ -4,45 +4,55 @@ body.publish-tabs h2 {
 
 #publish-tabs-controls {
 	list-style-type: none;
-	margin: 0;
-	overflow: hidden;
-	border-bottom: 1px solid #ddddcc;
+	margin: 0 -19px 10px;
+	padding: 0 19px;
+	border-bottom: 1px solid #ddd;
+	background: -moz-linear-gradient(bottom, #eee 0%, #fff 15%, #fff 100%);
+	background: -webkit-gradient(linear, left bottom, left top, from(#eee), to(#fff), color-stop(0.15, #fff));
 }
 
 #publish-tabs-controls li {
-	float: left;
 	list-style-type: none;
-	display: block;
-	padding: 5px 15px;
+	display: inline-block;
+	padding: 3px 10px;
 	margin: 0 3px 0 0;
 	cursor: pointer;
-	background-color: #bbb;
+	background: hsla(0, 0%, 0%, 0.03);
 	-moz-border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
-	color: #fff;
+	border: 1px solid #ddd;
+	color: #666;
+	position: relative;
+	top: 1px;
 }
 
-#publish-tabs-controls li:hover {
-	background-color: #aaa;
-}
-
+#publish-tabs-controls li:hover,
 #publish-tabs-controls li.selected {
-	background-color: #5a82b0;
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
 }
 
 #publish-tabs-controls li.invalid span {
-	background-color: #DD4422;
+	background-color: #aaa;
+	color: #fff;
 	display: inline-block;
 	font-weight: bold;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 11px;
 	padding: 1px 5px;
-	-moz-border-radius: 10px 10px;
-	-webkit-border-radius: 10px 10px;
-	border-radius: 10px 10px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px 8px;
+	border-radius: 8px 8px;
 	line-height: 1;
-	margin: 0 -5px 0 7px;
+	margin: 0 -5px 0 5px;
+	position: relative;
+	top: -1px;
+}
+
+#publish-tabs-controls li:hover span,
+#publish-tabs-controls li.selected span {
+	background-color: #dd4422;
 }
 
 .tab-group {
