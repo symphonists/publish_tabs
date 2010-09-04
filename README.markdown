@@ -1,8 +1,8 @@
 # Publish Tabs
  
-Version: 0.9   
+Version: 0.9.1   
 Author: Nick Dunn  
-Build Date: 2010-08-20  
+Build Date: 2010-09-04  
 Requirements: Symphony 2.2*
 
 *** NOTE** this extension requires as-yet unreleased Symphony 2.2 which will contain a simple update to Symphony's HTML output that makes this stuff possible. To try it out on pre-2.2 builds you'll need this core code change: <http://github.com/nickdunn/symphony-2/commit/95c006206542076f9f483c53b7a1a327ef314eac>
@@ -25,4 +25,5 @@ When you add a Publish Tab field to a section, any fields that appear *after* th
 
 ## Changelog
 
-**0.9** initial public release
+* **0.9.1** Fixes issue where title could not be created on publish form
+* **0.9** Initial public release
