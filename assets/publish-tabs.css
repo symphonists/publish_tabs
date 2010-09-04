@@ -14,6 +14,7 @@ body.publish-tabs h2 {
 #publish-tabs-controls li {
 	list-style-type: none;
 	display: inline-block;
+	*display: inline;
 	padding: 3px 10px;
 	margin: 0 3px 0 0;
 	cursor: pointer;
