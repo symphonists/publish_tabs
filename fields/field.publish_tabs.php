@@ -32,8 +32,21 @@
 		}
 		
 		public function appendFormattedElement(&$wrapper, $data, $encode=false, $mode=null) {
-
+	
+		}
+		
+		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
 			
+			// build this entry fully
+			$em = new EntryManager(Administration::instance());
+			$entry = reset($em->fetch($entry_id));
+			
+			// get the first field inside this tab
+			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
+			$field = $em->fieldManager->fetch($field_id);
+			
+			// get the first field's value as a substitude for the tab's return value
+			return $field->prepareTableValue($entry->getData($field_id), $link, $entry_id);
 		}
 				
 		public function createTable(){
