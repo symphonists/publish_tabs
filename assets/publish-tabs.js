@@ -3,7 +3,7 @@
 -----------------------------------------------------------------------------*/	 
 
 Symphony.Language.add({
-	'Untitled Tab': false,
+	'Untitled Tab': false
 });
 	
 
