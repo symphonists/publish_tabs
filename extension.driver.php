@@ -71,7 +71,7 @@
 				
 				$page->addElementToHead(new XMLElement(
 					'script',
-					'var publish_tabs = ' . json_encode($tabs),
+					"Symphony.Context.add('publish-tabs', " . json_encode($tabs) . ")",
 					array('type' => 'text/javascript')
 				), 987654321);
 			}
