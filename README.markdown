@@ -1,8 +1,8 @@
 # Publish Tabs
  
-* Version: 0.9.2
+* Version: 1.0
 * Author: Nick Dunn
-* Build Date: 2011-02-05
+* Build Date: 2011-02-07
 * Requirements: Symphony 2.2
 
 *** NOTE** this extension requires as-yet unreleased Symphony 2.2 which will contain a simple update to Symphony's HTML output that makes this stuff possible. To try it out on pre-2.2 builds you'll need this core code change: <http://github.com/nickdunn/symphony-2/commit/b56efe4f84e88576af3db14cc6767781b95aba31>

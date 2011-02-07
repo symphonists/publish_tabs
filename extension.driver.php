@@ -5,8 +5,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Publish Tabs',
-				'version'		=> '0.9.2',
-				'release-date'	=> '2011-02-05',
+				'version'		=> '1.0',
+				'release-date'	=> '2011-02-07',
 				'author'		=> array(
 					'name'			=> 'Nick Dunn',
 					'website'		=> 'http://nick-dunn.co.uk'
@@ -48,8 +48,8 @@
 			// only proceed on New or Edit publish pages
 			if ($page instanceof contentPublish and in_array($page->_context['page'], array('new', 'edit'))) {
 				
-				$page->addStylesheetToHead(URL . '/extensions/publish_tabs/assets/publish-tabs.css', 'screen', 9876543213);
-				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish-tabs.js', 987654322);
+				$page->addStylesheetToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.css', 'screen', 9876543213);
+				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.js', 987654322);
 				
 				include_once(TOOLKIT . '/class.sectionmanager.php');
 				$sm = new SectionManager(Administration::instance());
