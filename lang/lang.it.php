@@ -17,6 +17,9 @@
 
 	$dictionary = array(
 
+		'Untitled Tab' => 
+		'Scheda senza titolo',
+
 		'Publish Tab' =>
 		'Scheda'
 
