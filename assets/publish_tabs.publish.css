@@ -4,7 +4,7 @@ body.publish-tabs h2 {
 
 #publish-tabs-controls {
 	list-style-type: none;
-	margin: 0 -19px 10px;
+	margin: 5px -19px 10px;
 	padding: 0 19px;
 	border-bottom: 1px solid #ddd;
 	background: -moz-linear-gradient(bottom, #eee 0%, #fff 15%, #fff 100%);

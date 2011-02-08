@@ -31,6 +31,8 @@ var PublishTabs = {
 		var has_invalid_tabs = false;
 		this.tab_controls = jQuery('<ul id="publish-tabs-controls"></ul>');
 		
+		var publish_tabs = Symphony.Context.get('publish-tabs');
+		
 		for(tab in publish_tabs) {
 			
 			var main_fields = '';
