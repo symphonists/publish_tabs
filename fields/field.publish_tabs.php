@@ -4,7 +4,7 @@
 		
 		function __construct(&$parent){
 			parent::__construct($parent);
-			$this->_name = 'Publish Tab';
+			$this->_name = __('Publish Tab');
 			$this->_required = false;			
 			$this->set('hide', 'no');
 		}
