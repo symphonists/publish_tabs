@@ -5,8 +5,8 @@
 		public function about() {
 			return array(
 				'name'			=> 'Publish Tabs',
-				'version'		=> '1.0',
-				'release-date'	=> '2011-02-07',
+				'version'		=> '1.0.1',
+				'release-date'	=> '2011-02-11',
 				'author'		=> array(
 					'name'			=> 'Nick Dunn',
 					'website'		=> 'http://nick-dunn.co.uk'
