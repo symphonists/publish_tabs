@@ -77,7 +77,7 @@ var PublishTabs = {
 			this.tab_controls.find('li:first').click();
 		}
 		
-		jQuery('h2').after(this.tab_controls);
+		jQuery('.contents h2').after(this.tab_controls);
 		
 	},
 	
