@@ -65,3 +65,21 @@ body.publish-tabs h2 {
 .tab-group-selected {
 	position: static;
 }
+
+body.subsection #publish-tabs-controls {
+	background: -moz-linear-gradient(bottom, #2a2a2a 0%, #303030 15%, #303030 100%);
+	background: -webkit-gradient(linear, left bottom, left top, from(#2a2a2a), to(#303030), color-stop(0.15, #303030));
+	border-color: #616057;
+	margin: 0;
+	padding: 10px 12px 0 12px;
+}
+body.subsection #publish-tabs-controls li {
+	border-color: #515047;
+	border-bottom-color: #616057;
+}
+body.subsection #publish-tabs-controls li.selected,
+body.subsection #publish-tabs-controls li:hover {
+	background: #353533;
+	border-color: #616057;
+	border-bottom-color: #353533;
+}

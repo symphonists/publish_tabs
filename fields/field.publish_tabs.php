@@ -39,6 +39,10 @@
 			
 			// build this entry fully
 			$em = new EntryManager(Administration::instance());
+			$entries = $em->fetch($entry_id);
+			
+			if ($entries === false) return parent::prepareTableValue(null, $link, $entry_id);
+			
 			$entry = reset($em->fetch($entry_id));
 			
 			// get the first field inside this tab
