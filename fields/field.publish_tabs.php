@@ -9,7 +9,7 @@
 			$this->set('hide', 'no');
 		}
 				
-		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=null) {	
+		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=NULL) {	
 			$status = self::__OK__;			
 			return array(
 				'value' => ''
@@ -31,7 +31,7 @@
 			$wrapper->setValue($this->get('label'));
 		}
 		
-		public function appendFormattedElement(&$wrapper, $data, $encode=false, $mode=null) {
+		public function appendFormattedElement(&$wrapper, $data, $encode=false, $mode=NULL) {
 	
 		}
 		
@@ -41,14 +41,14 @@
 			$em = new EntryManager(Administration::instance());
 			$entries = $em->fetch($entry_id);
 			
-			if ($entries === false) return parent::prepareTableValue(null, $link, $entry_id);
+			if ($entries === false) return parent::prepareTableValue(NULL, $link, $entry_id);
 			
 			$entry = reset($em->fetch($entry_id));
 			
 			// get the first field inside this tab
 			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
 			
-			if ($field_id === null) return parent::prepareTableValue(null, $link, $entry_id);
+			if ($field_id === NULL) return parent::prepareTableValue(NULL, $link, $entry_id);
 			
 			$field = $em->fieldManager->fetch($field_id);
 			
