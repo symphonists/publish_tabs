@@ -47,6 +47,9 @@
 			
 			// get the first field inside this tab
 			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
+			
+			if ($field_id === null) return parent::prepareTableValue(null, $link, $entry_id);
+			
 			$field = $em->fieldManager->fetch($field_id);
 			
 			// get the first field's value as a substitude for the tab's return value
