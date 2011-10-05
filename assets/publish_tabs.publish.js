@@ -77,7 +77,8 @@ var PublishTabs = {
 			this.tab_controls.find('li:first').click();
 		}
 		
-		jQuery('#contents h2').after(this.tab_controls);
+		// make sure to append to only one element, since h2 elements may reside somewhere else in #contents
+		jQuery('#contents h2').eq(0).after(this.tab_controls);
 		
 	},
 	
