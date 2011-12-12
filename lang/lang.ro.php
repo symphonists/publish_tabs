@@ -13,10 +13,10 @@
 	 * Publish Tabs
 	 */
 	$dictionary = array(
-		'Untitled Tab' => 
+		'Untitled Tab' =>
 		'Tab neintitulat',
 
-		'Publish Tab' => 
-		'Tab publicare',
+		'Publish Tab' =>
+		false,
 
 	);
