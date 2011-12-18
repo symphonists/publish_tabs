@@ -1,14 +1,14 @@
-body.publish-tabs h2 {
-	border-bottom: 0;
+body.publish-tabs #context {
+	padding-bottom: 40px;
 }
 
 #publish-tabs-controls {
 	list-style-type: none;
-	margin: 5px -19px 10px;
-	padding: 0 19px;
-	border-bottom: 1px solid #ddd;
-	background: -moz-linear-gradient(bottom, #eee 0%, #fff 15%, #fff 100%);
-	background: -webkit-gradient(linear, left bottom, left top, from(#eee), to(#fff), color-stop(0.15, #fff));
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 16px;
+	margin: 0;
 }
 
 #publish-tabs-controls li {
@@ -18,7 +18,7 @@ body.publish-tabs h2 {
 	padding: 3px 10px;
 	margin: 0 3px 0 0;
 	cursor: pointer;
-	background: hsla(0, 0%, 0%, 0.03);
+	background: #f1f1f1;
 	-moz-border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
@@ -28,10 +28,14 @@ body.publish-tabs h2 {
 	top: 1px;
 }
 
-#publish-tabs-controls li:hover,
-#publish-tabs-controls li.selected {
+#publish-tabs-controls li.selected,
+#publish-tabs-controls li.selected:hover {
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
+}
+
+#publish-tabs-controls li:hover {
+	background: #f7f7f7;
 }
 
 #publish-tabs-controls li.invalid span {
@@ -41,17 +45,23 @@ body.publish-tabs h2 {
 	font-weight: bold;
 	font-family: "Times New Roman", Times, serif;
 	font-size: 11px;
-	padding: 1px 5px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px 8px;
-	border-radius: 8px 8px;
-	line-height: 1;
+	padding: 1px 6px;
+	-moz-border-radius: 99px;
+	-webkit-border-radius: 99px;
+	border-radius: 99px;
+	line-height: 1.3;
 	margin: 0 -5px 0 5px;
 	position: relative;
-	top: -1px;
 }
 
-#publish-tabs-controls li:hover span,
+#publish-tabs-controls li.invalid {
+	text-shadow: none;
+}
+
+#publish-tabs-controls li:hover span {
+	background-color: #999;
+}
+
 #publish-tabs-controls li.selected span {
 	background-color: #dd4422;
 }

@@ -41,12 +41,12 @@
 		}
 		
 		public function initializeAdmin($context) {	
-			$page = $context['parent']->Page;
+			$page = Administration::instance()->Page;
 			
 			$callback = Administration::instance()->getPageCallback();
 			
 			// only proceed on New or Edit publish pages
-			if ($page instanceof contentPublish and in_array($page->_context['page'], array('new', 'edit'))) {
+			if ($page instanceof contentPublish && in_array($callback['context']['page'], array('new', 'edit'))) {
 				
 				$page->addStylesheetToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.css', 'screen', 9876543213);
 				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.js', 987654322);

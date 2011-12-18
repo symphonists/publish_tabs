@@ -26,7 +26,7 @@ var PublishTabs = {
 		jQuery('body').addClass('publish-tabs');
 		
 		// are we creating a new entry or editing an existing one?
-		this.new_entry = jQuery('form:first').attr('action').replace(/\//g,'').match(/new$/);
+		this.new_entry = jQuery('#contents > form:first').attr('action').replace(/\//g,'').match(/new$/);
 		
 		var has_invalid_tabs = false;
 		this.tab_controls = jQuery('<ul id="publish-tabs-controls"></ul>');
@@ -77,7 +77,8 @@ var PublishTabs = {
 			this.tab_controls.find('li:first').click();
 		}
 		
-		jQuery('#contents h2').after(this.tab_controls);
+		jQuery('#context').append(this.tab_controls);
+		console.log(this.tab_controls)
 		
 	},
 	
