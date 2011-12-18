@@ -2,8 +2,8 @@
 	
 	Class fieldPublish_Tabs extends Field{	
 		
-		function __construct(&$parent){
-			parent::__construct($parent);
+		function __construct(){
+			parent::__construct();
 			$this->_name = __('Publish Tab');
 			$this->_required = false;			
 			$this->set('hide', 'no');
