@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="publish_tabs">
+<extension id="publish_tabs" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Publish Tabs</name>
 	<description>Add tab groups to entry create/edit forms</description>
 	<repo type="github">https://github.com/nickdunn/publish_tabs</repo>
