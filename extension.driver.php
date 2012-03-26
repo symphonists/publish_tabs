@@ -29,14 +29,15 @@
 		
 		public function initializeAdmin($context) {	
 			$page = Administration::instance()->Page;
+			$context = $page->getContext();
 			
 			$callback = Administration::instance()->getPageCallback();
 			
 			// only proceed on New or Edit publish pages
-			if ($page instanceof contentPublish and in_array($page->_context['page'], array('new', 'edit'))) {
+			if ($page instanceof contentPublish and in_array($context['page'], array('new', 'edit'))) {
 				
-				$page->addStylesheetToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.css', 'screen', 9876543213);
-				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.js', 987654322);
+				$page->addStylesheetToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.css', 'screen', 9001);
+				$page->addScriptToHead(URL . '/extensions/publish_tabs/assets/publish_tabs.publish.js', 9002);
 				
 				include_once(TOOLKIT . '/class.sectionmanager.php');
 				
@@ -59,7 +60,7 @@
 					'script',
 					"Symphony.Context.add('publish-tabs', " . json_encode($tabs) . ")",
 					array('type' => 'text/javascript')
-				), 987654321);
+				), 9003);
 			}
 			
 		}		

@@ -30,7 +30,7 @@ var PublishTabs = {
 		this.new_entry = (env.page === 'new');
 		
 		var has_invalid_tabs = false;
-		this.tab_controls = jQuery('<ul id="publish-tabs-controls"></ul>');
+		this.tab_controls = jQuery('<ul class="tabs"></ul>');
 		
 		var publish_tabs = Symphony.Context.get('publish-tabs');
 		
@@ -83,6 +83,8 @@ var PublishTabs = {
 	},
 	
 	showTab: function(tab) {
+		var w = jQuery('#contents').width();
+		
 		// deselect current tab and select the new tab
 		this.tab_controls.find('li.selected').removeClass('selected');
 		this.tab_controls.find('li.' + tab).addClass('selected');
@@ -90,7 +92,7 @@ var PublishTabs = {
 		// hide current tab group and select new group
 		jQuery('.tab-group-selected').removeClass('tab-group-selected');
 		jQuery('.tab-group-' + tab).addClass('tab-group-selected');
-		
+				
 		var invalid_field = jQuery('.tab-group-' + tab + ' .invalid');
 		// focus first invalid element
 		if (invalid_field.length) {
