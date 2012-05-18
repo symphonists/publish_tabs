@@ -34,23 +34,23 @@ var PublishTabs = {
 		
 		var publish_tabs = Symphony.Context.get('publish-tabs');
 		
-		for(tab in publish_tabs) {
-			
+		for(var i in publish_tabs) {
+
 			var main_fields = '';
 			var sidebar_fields = '';
 			
-			for(field in publish_tabs[tab].main) main_fields += '#' + publish_tabs[tab].main[field] + ', ';
-			for(field in publish_tabs[tab].sidebar) sidebar_fields += '#' + publish_tabs[tab].sidebar[field] + ', ';
+			for(field in publish_tabs[i].main) main_fields += '#' + publish_tabs[i].main[field] + ', ';
+			for(field in publish_tabs[i].sidebar) sidebar_fields += '#' + publish_tabs[i].sidebar[field] + ', ';
 			
 			main_fields = main_fields.replace(/, $/,'');
 			sidebar_fields = sidebar_fields.replace(/, $/,'');
 			
-			jQuery(main_fields).wrapAll('<div class="tab-group tab-group-' + tab + '"></div>');
-			jQuery(sidebar_fields).wrapAll('<div class="tab-group tab-group-' + tab + '"></div>');
+			jQuery(main_fields).wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
+			jQuery(sidebar_fields).wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
 			
-			var tab_field = jQuery('#field-' + tab).remove();
+			var tab_field = jQuery('#field-' + publish_tabs[i]['tab_id']).remove();
 			var tab_text = (tab_field.text() != '') ? tab_field.text() : Symphony.Language.get('Untitled Tab');
-			var tab_button = jQuery('<li class="'+tab+'">' + tab_text + '</li>');
+			var tab_button = jQuery('<li class="'+publish_tabs[i]['tab_id']+'">' + tab_text + '</li>');
 			
 			this.tab_controls.append(tab_button);
 			
@@ -65,7 +65,7 @@ var PublishTabs = {
 			});
 			
 			// find invalid fields
-			if (jQuery('.tab-group-' + tab + ' .invalid').length) {
+			if (jQuery('.tab-group-' + i + ' .invalid').length) {
 				has_invalid_tabs = true;
 				tab_button.addClass('invalid').append('<span>!</span>');
 			}
