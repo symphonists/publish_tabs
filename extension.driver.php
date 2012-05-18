@@ -46,13 +46,18 @@
 				
 				$tabs = array();
 				$current_tab = '';
-				
+				$index = -1;
+
 				foreach($section->fetchFieldsSchema() as $i => $field) {
-					if ($i == 0 && $field['type'] != 'publish_tabs') $current_tab = 'untitled-tab';
+					if ($i == 0 && $field['type'] != 'publish_tabs'){
+						$current_tab = 'untitled-tab';
+						$tabs[++$index]['tab_id'] = $current_tab;
+					}
 					if ($field['type'] == 'publish_tabs') {
 						$current_tab = $field['id'];
+						$tabs[++$index]['tab_id'] = $current_tab;
 					} else {
-						$tabs[$current_tab][$field['location']][] = 'field-' . $field['id'];
+						$tabs[$index][$field['location']][] = 'field-' . $field['id'];
 					}
 				}
 				
