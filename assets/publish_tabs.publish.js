@@ -51,7 +51,7 @@ var PublishTabs = {
 			var tab_field = jQuery('#field-' + publish_tabs[i]['tab_id']).remove();
 			var tab_text = (tab_field.text() != '') ? tab_field.text() : Symphony.Language.get('Untitled Tab');
 			var tab_button = jQuery('<li class="'+publish_tabs[i]['tab_id']+'">' + tab_text + '</li>');
-			
+
 			this.tab_controls.append(tab_button);
 			
 			// add click event to tab
@@ -79,7 +79,11 @@ var PublishTabs = {
 		}
 		
 		jQuery('#context').append(this.tab_controls);
-		
+
+		var initial_tab = self.getURLParameter('publish-tab');
+		if( initial_tab !== undefined ){
+			jQuery('.'+initial_tab).trigger('click');
+		}
 	},
 	
 	showTab: function(tab) {
@@ -102,10 +106,15 @@ var PublishTabs = {
 		else if (this.new_entry) {
 			jQuery('.tab-group-' + tab + ' .field:first *[name*="fields["]').focus();
 		}
+	},
+
+	getURLParameter: function(name) {
+		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
 	}
 	
 }
 
 jQuery(document).ready(function() {
 	PublishTabs.init();
+	jQuery('.drawer.vertical-left, .drawer.vertical-right').trigger('update.drawer');
 });
