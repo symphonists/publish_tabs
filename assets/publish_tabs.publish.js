@@ -50,18 +50,14 @@ var PublishTabs = {
 			
 			var tab_field = jQuery('#field-' + publish_tabs[i]['tab_id']).remove();
 			var tab_text = (tab_field.text() != '') ? tab_field.text() : Symphony.Language.get('Untitled Tab');
-			var tab_button = jQuery('<li class="'+publish_tabs[i]['tab_id']+'">' + tab_text + '</li>');
+			var tab_button = jQuery('<li class="tab-'+publish_tabs[i]['tab_id']+'" data-id="'+publish_tabs[i]['tab_id']+'">' + tab_text + '</li>');
 			
 			this.tab_controls.append(tab_button);
 			
 			// add click event to tab
 			tab_button.bind('click', function() {
 				if (jQuery(this).hasClass('selected')) return;
-				var tab_class = jQuery(this).attr('class')
-					.replace(/invalid/,'')
-					.replace(/selected/,'')
-					.replace(/ /g,'');
-				self.showTab(tab_class);
+				tab_button.addClass('invalid').append('<span>!</span>');
 			});
 			
 			// find invalid fields
