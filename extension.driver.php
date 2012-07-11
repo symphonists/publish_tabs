@@ -43,6 +43,8 @@
 				
 				$section_id = SectionManager::fetchIDFromHandle($callback['context']['section_handle']);
 				$section = SectionManager::fetch($section_id);
+
+				if( !$section instanceof Section ) return;
 				
 				$tabs = array();
 				$current_tab = '';
