@@ -83,7 +83,7 @@ var PublishTabs = {
 		
 		// deselect current tab and select the new tab
 		this.tab_controls.find('li.selected').removeClass('selected');
-		this.tab_controls.find('li.' + tab).addClass('selected');
+		this.tab_controls.find('li.tab-' + tab).addClass('selected');
 		
 		// hide current tab group and select new group
 		jQuery('.tab-group-selected').removeClass('tab-group-selected');
