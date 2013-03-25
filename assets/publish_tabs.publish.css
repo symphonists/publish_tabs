@@ -76,6 +76,12 @@ body.publish-tabs #context {
 	position: static;
 }
 
+body.subsection .tab-group {
+    position:relative;
+    top:0;
+    left:0;
+}
+
 body.subsection #publish-tabs-controls {
 	background: -moz-linear-gradient(bottom, #2a2a2a 0%, #303030 15%, #303030 100%);
 	background: -webkit-gradient(linear, left bottom, left top, from(#2a2a2a), to(#303030), color-stop(0.15, #303030));
