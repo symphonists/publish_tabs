@@ -1,3 +1,7 @@
+body.publish-tabs h2 {
+    border-bottom: 0;
+    width:100%;
+}
 body.publish-tabs #context {
 	padding-bottom: 40px;
 }
@@ -74,6 +78,12 @@ body.publish-tabs #context {
 
 .tab-group-selected {
 	position: static;
+}
+
+body.subsection .tab-group {
+    position:relative;
+    top:0;
+    left:0;
 }
 
 body.subsection #publish-tabs-controls {
