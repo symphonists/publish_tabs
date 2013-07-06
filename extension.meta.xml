@@ -2,12 +2,15 @@
 <extension id="publish_tabs" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Publish Tabs</name>
 	<description>Add tabs grouped to entry forms</description>
-	<repo type="github">https://github.com/nickdunn/publish_tabs</repo>
+	<repo type="github">https://github.com/symphonists/publish_tabs</repo>
 	<url type="discuss">http://symphony-cms.com/discuss/thread/49946/</url>
 	<types>
 		<type>Interface</type>
 	</types>
 	<authors>
+		<author>
+			<name github="symphonists" symphony="community">Symphony Community</name>
+		</author>
 		<author>
 			<name github="nickdunn" symphony="nickdunn">Nick Dunn</name>
 			<website>http://nick-dunn.co.uk</website>
