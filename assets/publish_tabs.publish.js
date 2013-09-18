@@ -11,6 +11,9 @@ Symphony.Language.add({
 	PublishTabs
 -----------------------------------------------------------------------------*/
 
+var cookie = readCookie("selectedtab");
+var initial_tab = this.getURLParameter('publish-tab');
+
 var PublishTabs = {
 	
 	tab_controls: null,
@@ -62,6 +65,7 @@ var PublishTabs = {
 					.replace(/selected/,'')
 					.replace(/ /g,'');
 				self.showTab(tab_class);
+				createCookie("selectedtab",tab_class);
 			});
 			
 			// find invalid fields
@@ -80,7 +84,7 @@ var PublishTabs = {
 		
 		jQuery('#context').append(this.tab_controls);
 
-		var initial_tab = self.getURLParameter('publish-tab');
+		//var initial_tab = self.getURLParameter('publish-tab');
 		if( initial_tab !== undefined ){
 			jQuery('.'+initial_tab).trigger('click');
 		}
@@ -106,15 +110,45 @@ var PublishTabs = {
 		else if (this.new_entry) {
 			jQuery('.tab-group-' + tab + ' .field:first *[name*="fields["]').focus();
 		}
-	},
-
-	getURLParameter: function(name) {
-		return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
-	}
-	
+	},	
 }
+
+	getURLParameter: function getURLParameter(name) {
+    	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+	
+	// Cookie functions
+	function createCookie(name,value,days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name+"="+value+expires+"; path=/";
+	}
+
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0;i < ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1,c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+
+	function eraseCookie(name) {
+		createCookie(name,"",-1);
+	}
+
 
 jQuery(document).ready(function() {
 	PublishTabs.init();
 	jQuery('.drawer.vertical-left, .drawer.vertical-right').trigger('update.drawer');
+	var activetab = jQuery('.tabs > li.' + cookie);
+	if( initial_tab == undefined ){
+	jQuery(activetab).trigger('click');
+	}
 });
