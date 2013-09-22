@@ -2,6 +2,7 @@
 	position: absolute;
 	top: -99999em;
 	left: -99999em;
+	width: 100%;
 }
 
 .tab-group-selected {
