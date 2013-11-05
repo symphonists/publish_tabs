@@ -14,13 +14,14 @@ Symphony.Language.add({
 	
 	'use strict';
 	
-	var PublishTabs = {
+	window.PublishTabs = {
 			
 		tab_controls: null,
-		new_entry: null,
+		new_entry: false,
 		
 		init: function() {
 			var self = this;
+			var context = $('#context');
 			
 			// thy shalt not pass if no Publish Tab fields used
 			var tab_fields = $('.field-publish_tabs');
@@ -48,8 +49,11 @@ Symphony.Language.add({
 				main_fields = main_fields.replace(/, $/,'');
 				sidebar_fields = sidebar_fields.replace(/, $/,'');
 				
-				$(main_fields).wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
-				$(sidebar_fields).wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
+				var $main_fields = $(main_fields);
+				var $sidebar_fields = $(sidebar_fields);
+				
+				$main_fields.wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
+				$sidebar_fields.wrapAll('<div class="tab-group tab-group-' + publish_tabs[i]['tab_id'] + '"></div>');
 				
 				var tab_field = $('#field-' + publish_tabs[i]['tab_id']).remove();
 				var tab_text = (tab_field.text() != '') ? tab_field.text() : Symphony.Language.get('Untitled Tab');
@@ -58,30 +62,32 @@ Symphony.Language.add({
 				this.tab_controls.append(tab_button);
 				
 				// add click event to tab
-				tab_button.bind('click', function() {
-					if ($(this).hasClass('selected')) return;
-					tab_button.addClass('invalid').append('<span>!</span>');
+				tab_button.on('click', function() {
+					var t = $(this);
+					var selector = t.attr('class').match(/tab-\d+/gi);
+					if (t.hasClass('selected')) return;
+					if (!!selector && !!selector.length) {
+						self.showTab(selector[0].replace(/tab-/gi, ''));
+					}
 				});
 				
 				// find invalid fields
-				if ($('.tab-group-' + i + ' .invalid').length) {
+				if (!!$main_fields.add($sidebar_fields).find('.invalid').length) {
 					has_invalid_tabs = true;
-					tab_button.addClass('invalid').append('<span>!</span>');
+					tab_button.addClass('invalid').append('<span class="icon">!</span>');
 				}
-				
 			}
 			
+			// append tags controls
+			context.append(this.tab_controls);
+			
+			// selected the right tab
 			if (has_invalid_tabs) {
 				this.tab_controls.find('li.invalid:first').click();
 			} else {
-				this.tab_controls.find('li:first').click();
-			}
-			
-			$('#context').append(this.tab_controls);
-
-			var initial_tab = self.getURLParameter('publish-tab');
-			if( initial_tab !== undefined ){
-				$('.'+initial_tab).trigger('click');
+				var initial_tab = self.getURLParameter('publish-tab');
+				var selector = !initial_tab ? 'li:first' : '.'+initial_tab;
+				this.tab_controls.find(selector).click();
 			}
 		},
 		

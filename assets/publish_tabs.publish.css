@@ -8,3 +8,21 @@
 .tab-group-selected {
 	position: static;
 }
+
+ul.tabs li.invalid span {
+	background: #dd4422;
+	border: 1px solid #fff;
+	color: rgba(255, 255, 255, 0.7);
+	text-shadow: 1px 1px 1px rgba(187, 34, 17, 1);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	margin: -1px 0 0 5px;
+	border-radius: 9px;
+	font-weight: bold;
+}
