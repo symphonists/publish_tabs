@@ -10,10 +10,8 @@
 }
 
 ul.tabs li.invalid span {
-	background: #dd4422;
-	border: 1px solid #fff;
+	background: #f4f4f4;
 	color: rgba(255, 255, 255, 0.7);
-	text-shadow: 1px 1px 1px rgba(187, 34, 17, 1);
 	-webkit-box-shadow: none;
 	box-shadow: none;
 	display: inline-block;
@@ -22,7 +20,12 @@ ul.tabs li.invalid span {
 	width: 16px;
 	height: 16px;
 	line-height: 16px;
-	margin: -1px 0 0 5px;
-	border-radius: 9px;
+	margin: 0 0 0 5px;
+	border-radius: 8px;
 	font-weight: bold;
+}
+
+ul.tabs li.invalid.selected span {
+	background: #dd4422;
+	color: #f4f4f4;
 }
