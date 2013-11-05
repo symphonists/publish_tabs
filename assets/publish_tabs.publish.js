@@ -64,10 +64,10 @@ Symphony.Language.add({
 				// add click event to tab
 				tab_button.on('click', function() {
 					var t = $(this);
-					var selector = t.attr('class').match(/tab-\d+/gi);
+					var id = t.attr('data-id');
 					if (t.hasClass('selected')) return;
-					if (!!selector && !!selector.length) {
-						self.showTab(selector[0].replace(/tab-/gi, ''));
+					if (!!id) {
+						self.showTab(id);
 					}
 				});
 				
