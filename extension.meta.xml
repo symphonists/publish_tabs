@@ -12,6 +12,10 @@
 			<name github="symphonists" symphony="community">Symphony Community</name>
 		</author>
 		<author>
+			<name github="DeuxHuitHuit" symphony="nitriques">Deux Huit Huit</name>
+			<website>http://deuxhuithuit.com</website>
+		</author>
+		<author>
 			<name github="nickdunn" symphony="nickdunn">Nick Dunn</name>
 			<website>http://nick-dunn.co.uk</website>
 		</author>
@@ -20,6 +24,10 @@
 		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry create/edit forms</item>
 	</media>
 	<releases>
+		<release version="1.2.0" date="2013-11-06" min="2.3.x">
+			- Fixed issue #21
+			- Fixed issue #22
+		</release>
 		<release version="1.1.2" date="2012-05-17" min="2.3.x" />
 		<release version="1.1.1" date="2012-03-26" min="2.3.x" />
 		<release version="1.0.2" date="2011-12-11" min="2.2" max="2.2.x" />
