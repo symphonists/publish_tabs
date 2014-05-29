@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="publish_tabs" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="publish_tabs" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Publish Tabs</name>
 	<description>Add tabs grouped to entry forms</description>
 	<repo type="github">https://github.com/symphonists/publish_tabs</repo>
-	<url type="discuss">http://symphony-cms.com/discuss/thread/49946/</url>
+	<url type="discuss">http://getsymphony.com/discuss/thread/49946/</url>
 	<types>
 		<type>Interface</type>
 	</types>
@@ -24,6 +24,9 @@
 		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry create/edit forms</item>
 	</media>
 	<releases>
+		<release version="1.2.1" date="2014-05-29" min="2.3.x">
+			- Fixed issue #20
+		</release>
 		<release version="1.2.0" date="2013-11-06" min="2.3.x">
 			- Fixed issue #21
 			- Fixed issue #22

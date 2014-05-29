@@ -9,7 +9,7 @@
 	position: static;
 }
 
-ul.tabs li.invalid span {
+ul.tabs li.invalid .icon {
 	background: #f4f4f4;
 	color: rgba(255, 255, 255, 0.7);
 	-webkit-box-shadow: none;
@@ -22,10 +22,21 @@ ul.tabs li.invalid span {
 	line-height: 16px;
 	margin: 0 0 0 5px;
 	border-radius: 8px;
-	font-weight: bold;
+	font-weight: lighter;
 }
 
-ul.tabs li.invalid.selected span {
+ul.tabs li.invalid.selected .icon {
 	background: #dd4422;
 	color: #f4f4f4;
+}
+
+ul.tabs li.invalid:hover,
+ul.tabs li.invalid .icon {
+	text-shadow: none;
+	color: #dd4422;
+}
+
+ul.tabs li.invalid:hover .icon {
+	background: #dd4422;
+	color: rgba(255, 255, 255, 0.7);
 }
