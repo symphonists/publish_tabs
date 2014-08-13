@@ -73,6 +73,10 @@
 
 		}
 
+		public function prepareReadableValue($data, $entry_id=NULL) {
+			return $this->prepareTableValue($data, null, $entry_id);
+		}
+
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
 			// build this entry fully
 			$entries = EntryManager::fetch($entry_id);
