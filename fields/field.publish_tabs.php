@@ -53,11 +53,11 @@
 		Publish:
 	-------------------------------------------------------------------------*/
 
-		public function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
+		public function displayPublishPanel(XMLElement &$wrapper, $data = NULL, $flagWithError = NULL, $fieldnamePrefix = NULL, $fieldnamePostfix = NULL, $entry_id = NULL){
 			$wrapper->setValue($this->get('label'));
 		}
 
-		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=NULL) {
+		public function processRawFieldData($data, &$status, &$message = NULL, $simulate = false, $entry_id = NULL) {
 			$status = self::__OK__;
 
 			return array(
@@ -69,11 +69,11 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
-		public function appendFormattedElement(&$wrapper, $data, $encode=false, $mode=NULL) {
+		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = NULL, $entry_id = NULL) {
 
 		}
 
-		public function prepareReadableValue($data, $entry_id=NULL) {
+		public function prepareReadableValue($data, $entry_id = NULL, $truncate = false, $defaultValue = NULL) {
 			return $this->prepareTableValue($data, null, $entry_id);
 		}
 
