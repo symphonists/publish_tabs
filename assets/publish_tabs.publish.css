@@ -1,4 +1,4 @@
-.tab-group {
+/*.tab-group {
 	position: absolute;
 	top: -99999em;
 	left: -99999em;
@@ -39,4 +39,4 @@ ul.tabs li.invalid .icon {
 ul.tabs li.invalid:hover .icon {
 	background: #dd4422;
 	color: rgba(255, 255, 255, 0.7);
-}
+}*/

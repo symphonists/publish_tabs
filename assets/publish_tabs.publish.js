@@ -74,7 +74,7 @@ Symphony.Language.add({
 					var id = t.attr('data-id');
 					if (t.hasClass('selected')) return;
 					if (!!id) {
-						self.showTab(id);
+						self.showTab(t);
 						// if it's a real user click
 						if (!!e.originalEvent) {
 							self.saveLocalTab('publish-tab', id);
@@ -102,10 +102,60 @@ Symphony.Language.add({
 				var selector = !!initial_tab ? '.' + initial_tab : (!!local_tab ? local_tab : 'li:first');
 				this.tab_controls.find(selector).click();
 			}
+
+			// Init - Variables
+			var o = {
+				tabGroup: '.tab-group',
+				secTabGroup: '.secondary.column .tab-group',
+				priTabGroup: '.primary.column .tab-group',
+				columns: '.two.columns',
+				secColumn: '.secondary.column',
+				priColumn: '.primary.column',
+				contextTabs: '#context .tabs li'
+			};
+
+			// Init - Repartition of the divided tabs in the Primary Column
+			if($(o.secTabGroup).length > 1){
+				$(o.secTabGroup).parents(o.columns).attr('class', '');
+
+				$(o.secTabGroup).each(function(){
+					var t = $(this);
+					var classes = t.attr('class').split(' ');
+
+					if($(o.priTabGroup+'.'+classes[1]).length) {
+						$('> .field', t).each(function(){
+							$(this).appendTo(o.priTabGroup+'.'+classes[1]);
+						});
+					} else {
+						t.appendTo(o.priColumn);
+					}
+				});
+
+				$(o.secTabGroup).remove();
+			}
+
+			// Init - Add a title to each Tab
+			$(o.tabGroup).each(function(){
+				var t = $(this);
+				var title = $(o.contextTabs).eq(t.index()).html();
+				t.prepend('<h2>'+title+'</h2>');
+			});
+
+			// Init Scroll Events
+			self.updateTab();
+			$(window).on('scroll', function(){
+				self.updateTab();
+			}).on('resize', function(){
+				self.updateTab();
+			});
 		},
 
-		showTab: function(tab) {
-			var w = $('#contents').width();
+		showTab: function(t) {
+			$('html, body').stop().animate({scrollTop: ($('.tab-group').eq(t.index()).offset().top - 159)}, 750);
+
+			return false;
+
+			/*var w = $('#contents').width();
 
 			// de-select current tab and select the new tab
 			this.tab_controls.find('li.selected').removeClass('selected');
@@ -123,6 +173,34 @@ Symphony.Language.add({
 			// focus first field in tab when creating a new entry
 			else if (this.new_entry) {
 				$('.tab-group-' + tab + ' .field:first *[name*="fields["]').focus();
+			}*/
+		},
+
+		updateTab: function() {
+			var o = {
+				tabGroup: '.tab-group',
+				contextTabs: '#context .tabs li'
+			};
+			var win = $(window);
+			var pageEnd = $(document).height() - win.height();
+			var curScroll = win.scrollTop();
+
+			if(curScroll == 0){
+				$(o.contextTabs).removeClass('selected');
+				if(win.width() < 1280) $(o.contextTabs + ':first-child').addClass('selected');
+				else $(o.contextTabs + ':nth-child(2)').addClass('selected');
+			} else if(curScroll == pageEnd){
+				$(o.contextTabs).removeClass('selected');
+				$(o.contextTabs + ':last-child').addClass('selected');
+			} else {
+				$(o.tabGroup).each(function(){
+					var t = $(this);
+
+					if(curScroll + (win.height() / 2) > t.offset().top) {
+						$(o.contextTabs).removeClass('selected');
+						$(o.contextTabs).eq(t.index()).addClass('selected');
+					}
+				});
 			}
 		},
 

@@ -24,6 +24,9 @@
 		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry create/edit forms</item>
 	</media>
 	<releases>
+		<release version="2.0.0" date="TBA" min="4.0.0" max="4.x.x">
+			- Update for Symphony 4.x
+		</release>
 		<release version="1.3.1" date="2015-02-02" min="2.4" max="2.6.x">
 			- Marked as compatible with Symphony 2.6.x
 			- Removed the field from the Data Source editor since it outputs nothing.
