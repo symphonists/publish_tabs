@@ -17,12 +17,12 @@
 
 .tab-group:nth-child(n + 2) {
 	box-sizing: border-box;
-	position: relative!important; left: 0!important; top: 0!important; padding-bottom: 3rem;
+	position: relative; left: 0; top: 0; padding-bottom: 3rem;
 }
 
 @media (max-width: 1279px){
 	.tab-group:first-child {
-		position: relative!important; left: 0!important; top: 0!important; padding-bottom: 3rem; height: auto;
+		position: relative; left: 0; top: 0; padding-bottom: 3rem; height: auto;
 	}
 
 	.tab-group:nth-child(n + 2) {
@@ -32,7 +32,7 @@
 
 @media (min-width: 1280px){
 	.tab-group:first-child {
-		overflow: auto; position: fixed!important; left: 25.1rem!important; right: 45rem; top: 6rem!important; padding: 3rem 3rem 10rem; width: auto; height: calc(100vh - 6rem);
+		overflow: auto; position: fixed; left: 25.1rem; right: 45rem; top: 6rem; padding: 3rem 3rem 10rem; width: auto; height: calc(100vh - 6rem);
 	}
 
 	.tab-group:first-child > * {
