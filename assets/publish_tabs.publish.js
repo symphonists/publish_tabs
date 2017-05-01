@@ -127,7 +127,14 @@ Symphony.Language.add({
 							$(this).appendTo(o.priTabGroup+'.'+classes[1]);
 						});
 					} else {
-						t.appendTo(o.priColumn);
+						var tID = classes[1].replace('tab-group-', '');
+						var prev = $(o.contextTabs+'[data-id="'+tID+'"]').prev();
+
+						if(prev.length) {
+							$(o.priTabGroup).eq(prev.index()).after(t);
+						} else {
+							t.prependTo(o.priColumn);
+						}
 					}
 				});
 
@@ -135,10 +142,11 @@ Symphony.Language.add({
 			}
 
 			// Init - Add a title to each Tab
-			$(o.tabGroup).each(function(){
+			$(o.contextTabs).each(function(){
 				var t = $(this);
-				var title = $(o.contextTabs).eq(t.index()).html();
-				t.prepend('<h2>'+title+'</h2>');
+				var tID = t.attr('data-id');
+				var title = t.text();
+				$(o.priTabGroup+'.tab-group-'+tID).prepend('<h2>'+title+'</h2>');
 			});
 
 			// Init Scroll Events
@@ -154,26 +162,6 @@ Symphony.Language.add({
 			$('html, body').stop().animate({scrollTop: ($('.tab-group').eq(t.index()).offset().top - 159)}, 750);
 
 			return false;
-
-			/*var w = $('#contents').width();
-
-			// de-select current tab and select the new tab
-			this.tab_controls.find('li.selected').removeClass('selected');
-			this.tab_controls.find('li.tab-' + tab).addClass('selected');
-
-			// hide current tab group and select new group
-			$('.tab-group-selected').removeClass('tab-group-selected');
-			$('.tab-group-' + tab).addClass('tab-group-selected');
-
-			var invalid_field = $('.tab-group-' + tab + ' .invalid');
-			// focus first invalid element
-			if (invalid_field.length) {
-				invalid_field.eq(0).find('*[name*="fields["]').focus();
-			}
-			// focus first field in tab when creating a new entry
-			else if (this.new_entry) {
-				$('.tab-group-' + tab + ' .field:first *[name*="fields["]').focus();
-			}*/
 		},
 
 		updateTab: function() {
