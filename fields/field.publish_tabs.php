@@ -22,9 +22,9 @@
 		public function createTable(){
 			return Symphony::Database()->query(
 				"CREATE TABLE IF NOT EXISTS `tbl_entries_data_" . $this->get('id') . "` (
-				  `id` int(11) unsigned NOT NULL auto_increment,
-				  `entry_id` int(11) unsigned NOT NULL,
-				  `value` double default NULL,
+				  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+				  `entry_id` INT(11) UNSIGNED NOT NULL,
+				  `value` DOUBLE DEFAULT NULL,
 				  PRIMARY KEY  (`id`),
 				  KEY `entry_id` (`entry_id`),
 				  KEY `value` (`value`)
@@ -53,11 +53,11 @@
 		Publish:
 	-------------------------------------------------------------------------*/
 
-		public function displayPublishPanel(XMLElement &$wrapper, $data = NULL, $flagWithError = NULL, $fieldnamePrefix = NULL, $fieldnamePostfix = NULL, $entry_id = NULL){
+		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null){
 			$wrapper->setValue($this->get('label'));
 		}
 
-		public function processRawFieldData($data, &$status, &$message = NULL, $simulate = false, $entry_id = NULL) {
+		public function processRawFieldData($data, &$status, &$message = null, $simulate = false, $entry_id = null) {
 			$status = self::__OK__;
 
 			return array(
@@ -73,26 +73,26 @@
 			return null;
 		}
 
-		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = NULL, $entry_id = NULL) {
+		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = null, $entry_id = null) {
 
 		}
 
-		public function prepareReadableValue($data, $entry_id = NULL, $truncate = false, $defaultValue = NULL) {
+		public function prepareReadableValue($data, $entry_id = null, $truncate = false, $defaultValue = null) {
 			return $this->prepareTableValue($data, null, $entry_id);
 		}
 
-		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
+		public function prepareTableValue($data, XMLElement $link = null, $entry_id = null) {
 			// build this entry fully
 			$entries = EntryManager::fetch($entry_id);
 
-			if ($entries === false) return parent::prepareTableValue(NULL, $link, $entry_id);
+			if ($entries === false) return parent::prepareTableValue(null, $link, $entry_id);
 
 			$entry = reset(EntryManager::fetch($entry_id));
 
 			// get the first field inside this tab
 			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
 
-			if ($field_id === NULL) return parent::prepareTableValue(NULL, $link, $entry_id);
+			if ($field_id === null) return parent::prepareTableValue(null, $link, $entry_id);
 
 			$field = FieldManager::fetch($field_id);
 
