@@ -115,7 +115,7 @@ Symphony.Language.add({
 			};
 
 			// Init - Repartition of the divided tabs in the Primary Column
-			if($(o.secTabGroup).length > 1){
+			if($(o.secTabGroup).length){
 				$(o.secTabGroup).parents(o.columns).attr('class', '');
 
 				$(o.secTabGroup).each(function(){
@@ -123,7 +123,7 @@ Symphony.Language.add({
 					var classes = t.attr('class').split(' ');
 
 					if($(o.priTabGroup+'.'+classes[1]).length) {
-						$('> .field', t).each(function(){
+						$('> .field, > .field-group', t).each(function(){
 							$(this).appendTo(o.priTabGroup+'.'+classes[1]);
 						});
 					} else {
