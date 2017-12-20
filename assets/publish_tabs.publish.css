@@ -1,5 +1,89 @@
 /*-------------------------------------------------------------------------
-	Publish Tabs
+	Tabs
+-------------------------------------------------------------------------*/
+
+#context > .tabs {
+	order: 2;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	margin: 1px 0 0;
+	padding: 0 3rem;
+	border-bottom: 1px solid #d3dce2;
+	background: #fff;
+	height: 6rem;
+	z-index: 10;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+#context > .tabs li {
+	box-sizing: border-box;
+	position: relative;
+	color: #3B3D40;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	line-height: 6rem;
+	margin-right: 3rem;
+	margin-bottom: -1px;
+	border-bottom: 2px solid transparent;
+	height: 6rem;
+	cursor: pointer;
+}
+
+#context > .tabs li + li {
+	margin-left: 1rem;
+}
+
+#context > .tabs li:hover,
+#context > .tabs li.selected,
+#context > .tabs li.active {
+	color: #2f77eb!important;
+	border-bottom-color: #2f77eb;
+	z-index: 10;
+}
+
+#context > .tabs li.invalid {
+	color: #ee494e!important;
+}
+
+#context > .tabs li.invalid:hover,
+#context > .tabs li.invalid.selected,
+#context > .tabs li.invalid.selected:hover {
+	color: #ee494e!important;
+	border-bottom-color: #ee494e;
+	z-index: 10;
+}
+
+@media (min-width: 1280px){
+	#context > .tabs {
+		left: auto;
+		width: 45rem;
+	}
+
+	#context > .tabs:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		background: #d3dce2;
+		width: 1px;
+		height: 100vh;
+	}
+
+	#context > .tabs li:first-child {
+		display: none;
+	}
+}
+
+/*-------------------------------------------------------------------------
+	Tab Groups
 -------------------------------------------------------------------------*/
 
 .tab-group {
@@ -8,7 +92,10 @@
 }
 
 .tab-group > h2 {
-	color: #2f77eb; font-size: 2.4rem; font-weight: 300; padding: 1rem 0 3rem;
+	color: #2f77eb;
+	font-size: 2.4rem;
+	font-weight: 300;
+	padding: 1rem 0 3rem;
 }
 
 .tab-group:first-child > h2 {
@@ -17,26 +104,43 @@
 
 .tab-group:nth-child(n + 2) {
 	box-sizing: border-box;
-	position: relative; left: 0; top: 0; padding-bottom: 3rem;
+	position: relative;
+	left: 0;
+	top: 0;
+	padding-bottom: 3rem;
 }
 
 @media (max-width: 1279px){
 	.tab-group:first-child {
-		position: relative; left: 0; top: 0; padding-bottom: 3rem; height: auto;
+		position: relative;
+		left: 0;
+		top: 0;
+		padding-bottom: 3rem;
+		height: auto;
 	}
 
 	.tab-group:nth-child(n + 2) {
-		padding-top: 3rem; border-top: 1px solid #d3dce2;
+		padding-top: 3rem;
+		border-top: 1px solid #d3dce2;
 	}
 }
 
 @media (min-width: 1280px){
 	.tab-group:first-child {
-		overflow: auto; position: fixed; left: 25.1rem; right: 45rem; top: 6rem; padding: 3rem 3rem 10rem; width: auto; height: calc(100vh - 6rem);
+		overflow: auto;
+		position: fixed;
+		left: 25.1rem;
+		right: 45rem;
+		top: 6rem;
+		padding: 3rem 3rem 10rem;
+		width: auto;
+		height: calc(100vh - 6rem);
 	}
 
 	.tab-group:first-child > * {
-		margin-left: auto; margin-right: auto; max-width: 90rem;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 90rem;
 	}
 
 	.tab-group:nth-child(2) {
@@ -44,10 +148,16 @@
 	}
 
 	.tab-group:nth-child(n + 2) {
-		clear: both; float: right; margin-right: -3rem; padding-left: 3rem; padding-right: 3rem; width: 45rem;
+		clear: both;
+		float: right;
+		margin-right: -3rem;
+		padding-left: 3rem;
+		padding-right: 3rem;
+		width: 45rem;
 	}
 
 	.tab-group:nth-child(n + 3) {
-		padding-top: 3rem; border-top: 1px solid #d3dce2;
+		padding-top: 3rem;
+		border-top: 1px solid #d3dce2;
 	}
 }
