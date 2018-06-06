@@ -1,42 +1,77 @@
-.tab-group {
+/*-----------------------------------------------------------------------------
+	Tabs
+-----------------------------------------------------------------------------*/
+
+#context > .tabs {
+	order: 2;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	margin: 1px 0 0;
+	padding: 0 3rem;
+	border-bottom: 1px solid #d3dce2;
+	background: #fff;
+	height: 6rem;
+	z-index: 10;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+#context > .tabs li {
+	box-sizing: border-box;
+	position: relative;
+	color: #3B3D40;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	line-height: 6rem;
+	margin-right: 3rem;
+	margin-bottom: -1px;
+	border-bottom: 2px solid transparent;
+	height: 6rem;
+	cursor: pointer;
+}
+
+#context > .tabs li + li {
+	margin-left: 1rem;
+}
+
+#context > .tabs li:hover,
+#context > .tabs li.selected,
+#context > .tabs li.active {
+	color: #2f77eb!important;
+	border-bottom-color: #2f77eb;
+	z-index: 10;
+}
+
+#context > .tabs li.invalid {
+	color: #ee494e!important;
+}
+
+#context > .tabs li.invalid:hover,
+#context > .tabs li.invalid.selected,
+#context > .tabs li.invalid.selected:hover {
+	color: #ee494e!important;
+	border-bottom-color: #ee494e;
+	z-index: 10;
+}
+
+/*-----------------------------------------------------------------------------
+	Tab Groups
+-----------------------------------------------------------------------------*/
+
+body.publish-tabs #contents {
+	padding-top: 12rem;
+}
+
+.tab-group:not(.tab-group-selected) {
 	position: absolute;
 	top: -99999em;
 	left: -99999em;
 	width: 100%;
-}
-
-.tab-group-selected {
-	position: static;
-}
-
-ul.tabs li.invalid .icon {
-	background: #f4f4f4;
-	color: rgba(255, 255, 255, 0.7);
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	display: inline-block;
-	vertical-align: top;
-	text-align: center;
-	width: 16px;
-	height: 16px;
-	line-height: 16px;
-	margin: 0 0 0 5px;
-	border-radius: 8px;
-	font-weight: lighter;
-}
-
-ul.tabs li.invalid.selected .icon {
-	background: #dd4422;
-	color: #f4f4f4;
-}
-
-ul.tabs li.invalid:hover,
-ul.tabs li.invalid .icon {
-	text-shadow: none;
-	color: #dd4422;
-}
-
-ul.tabs li.invalid:hover .icon {
-	background: #dd4422;
-	color: rgba(255, 255, 255, 0.7);
 }
