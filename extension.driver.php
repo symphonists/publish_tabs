@@ -3,18 +3,31 @@
 	class extension_publish_tabs extends Extension {
 
 		public function uninstall() {
-			Symphony::Database()->query("DROP TABLE `tbl_fields_publish_tabs`");
+			return Symphony::Database()
+				->drop('tbl_fields_publish_tabs')
+				->ifExists()
+				->execute()
+				->success();
 		}
 
 		public function install() {
-			Symphony::Database()->query(
-				"CREATE TABLE IF NOT EXISTS `tbl_fields_publish_tabs` (
-					`id` INT(11) NOT NULL AUTO_INCREMENT,
-					`field_id` INT(11) NOT NULL,
-					PRIMARY KEY (`id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
-			);
-			return true;
+			return Symphony::Database()
+				->create('tbl_fields_publish_tabs')
+				->ifNotExists()
+				->charset('utf8')
+				->collate('utf8_unicode_ci')
+				->fields([
+					'id' => [
+						'type' => 'int(11)',
+						'auto' => true,
+					],
+					'field_id' => 'int(11)',
+				])
+				->keys([
+					'id' => 'primary',
+				])
+				->execute()
+				->success();
 		}
 
 		public function getSubscribedDelegates() {

@@ -20,16 +20,29 @@
 	-------------------------------------------------------------------------*/
 
 		public function createTable(){
-			return Symphony::Database()->query(
-				"CREATE TABLE IF NOT EXISTS `tbl_entries_data_" . $this->get('id') . "` (
-				  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-				  `entry_id` INT(11) UNSIGNED NOT NULL,
-				  `value` DOUBLE DEFAULT NULL,
-				  PRIMARY KEY  (`id`),
-				  KEY `entry_id` (`entry_id`),
-				  KEY `value` (`value`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
-			);
+			return Symphony::Database()
+				->create('tbl_entries_data_' . $this->get('id'))
+				->ifNotExists()
+				->charset('utf8')
+				->collate('utf8_unicode_ci')
+				->fields([
+					'id' => [
+						'type' => 'int(11)',
+						'auto' => true,
+					],
+					'entry_id' => 'int(11)',
+					'value' => [
+						'type' => 'double',
+						'null' => true,
+					],
+				])
+				->keys([
+					'id' => 'primary',
+					'entry_id' => 'key',
+					'value' => 'key',
+				])
+				->execute()
+				->success();
 		}
 
 	/*-------------------------------------------------------------------------
@@ -90,7 +103,15 @@
 			$entry = reset(EntryManager::fetch($entry_id));
 
 			// get the first field inside this tab
-			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
+			$field_id = Symphony::Database()
+				->select(['id'])
+				->from('tbl_fields')
+				->where(['parent_section' => $this->get('parent_section')])
+				->where(['sortorder' => ($this->get('sortorder') + 1)])
+				->orderBy('sortorder')
+				->limit(1)
+				->execute()
+				->variable('id');
 
 			if ($field_id === null) return parent::prepareTableValue(null, $link, $entry_id);
 
