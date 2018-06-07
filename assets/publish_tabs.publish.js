@@ -19,7 +19,6 @@ Symphony.Language.add({
 
 		tab_controls: null,
 		new_entry: false,
-		sectionHandle: 'not-found',
 
 		init: function() {
 			var self = this;
@@ -30,9 +29,6 @@ Symphony.Language.add({
 			if (!tab_fields.length) return;
 
 			var body = $('body');
-
-			// isolate the section handle: this is use as a key for local storage
-			this.sectionHandle = /section-handle-[^\s]+/g.exec(body.attr('class'))[0];
 
 			body.addClass('publish-tabs');
 
@@ -91,17 +87,6 @@ Symphony.Language.add({
 
 			// append tags controls
 			context.append(this.tab_controls);
-
-			// selected the right tab
-			if (has_invalid_tabs) {
-				this.tab_controls.find('li.invalid:first').click();
-			} else {
-				var initial_tab = self.getURLParameter('publish-tab');
-				var local_tab = self.getLocalTab('publish-tab');
-
-				var selector = !!initial_tab ? '.' + initial_tab : (!!local_tab ? local_tab : 'li:first');
-				this.tab_controls.find(selector).click();
-			}
 
 			// Init - Variables
 			var o = {
@@ -191,25 +176,6 @@ Symphony.Language.add({
 				});
 			}
 		},
-
-		getURLParameter: function(name) {
-			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
-		},
-
-		generateLocalKey: function (name) {
-			if (!name) {
-				throw new Exception('A name must be given');
-			}
-			return 'symphony.' + name + '.' + this.sectionHandle;
-		},
-
-		getLocalTab: function (name) {
-			return localStorage[this.generateLocalKey(name)];
-		},
-
-		saveLocalTab: function (name, tab) {
-			localStorage[this.generateLocalKey(name)] = '.tab-' + tab;
-		}
 	};
 
 	$(function() {
