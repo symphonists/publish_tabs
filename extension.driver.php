@@ -55,7 +55,7 @@
 				include_once(TOOLKIT . '/class.sectionmanager.php');
 
 				$section_id = SectionManager::fetchIDFromHandle($callback['context']['section_handle']);
-				$section = SectionManager::fetch($section_id);
+				$section = (new SectionManager)->select()->section($section_id)->execute()->next();
 
 				if( !$section instanceof Section ) return;
 
