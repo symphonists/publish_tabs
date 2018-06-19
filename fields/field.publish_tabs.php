@@ -96,11 +96,19 @@
 
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
 			// build this entry fully
-			$entries = EntryManager::fetch($entry_id);
+			$entries = (new EntryManager)
+				->select()
+				->entry($entry_id)
+				->execute()
+				->next();
 
 			if ($entries === false) return parent::prepareTableValue(NULL, $link, $entry_id);
 
-			$entry = reset(EntryManager::fetch($entry_id));
+			$entry = reset((new EntryManager)
+				->select()
+				->entry($entry_id)
+				->execute()
+				->next());
 
 			// get the first field inside this tab
 			$field_id = Symphony::Database()
@@ -115,7 +123,11 @@
 
 			if ($field_id === NULL) return parent::prepareTableValue(NULL, $link, $entry_id);
 
-			$field = FieldManager::fetch($field_id);
+			$field = (new FieldManager)
+				->select()
+				->field($field_id)
+				->execute()
+				->next();
 
 			// get the first field's value as a substitude for the tab's return value
 			return $field->prepareTableValue($entry->getData($field_id), $link, $entry_id);
