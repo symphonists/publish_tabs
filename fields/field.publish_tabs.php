@@ -102,26 +102,29 @@
 				->execute()
 				->next();
 
-			if ($entries === false) return parent::prepareTableValue(NULL, $link, $entry_id);
+			if (!$entries) return parent::prepareTableValue(NULL, $link, $entry_id);
 
-			$entry = reset((new EntryManager)
+			$entry = (new EntryManager)
 				->select()
 				->entry($entry_id)
+				->section($this->get('parent_section'))
+				->includeAllfields()
 				->execute()
-				->next());
+				->next();
 
 			// get the first field inside this tab
 			$field_id = Symphony::Database()
 				->select(['id'])
 				->from('tbl_fields')
 				->where(['parent_section' => $this->get('parent_section')])
-				->where(['sortorder' => $this->get('sortorder') + 1])
+				->where(['sortorder' => ['>' => $this->get('sortorder')]])
+				->where(['show_column' => 'yes'])
 				->orderBy('sortorder')
 				->limit(1)
 				->execute()
 				->variable('id');
 
-			if ($field_id === NULL) return parent::prepareTableValue(NULL, $link, $entry_id);
+			if (!$field_id) return parent::prepareTableValue(NULL, $link, $entry_id);
 
 			$field = (new FieldManager)
 				->select()
