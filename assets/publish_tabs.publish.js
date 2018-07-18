@@ -144,7 +144,7 @@ Symphony.Language.add({
 		},
 
 		showTab: function(t) {
-			$('html, body').stop().animate({scrollTop: ($('.tab-group').eq(t.index()).offset().top - 159)}, 750);
+			$('html, body').stop().animate({scrollTop: ($('.tab-group').eq(t.index()).offset().top - 119)}, 750);
 
 			return false;
 		},

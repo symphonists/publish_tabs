@@ -110,6 +110,10 @@
 	padding-bottom: 3rem;
 }
 
+.tab-group:last-child {
+	min-height: calc(100vh - 21.9rem);
+}
+
 @media (max-width: 1279px){
 	.tab-group:first-child {
 		position: relative;
