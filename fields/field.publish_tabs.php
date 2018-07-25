@@ -73,11 +73,7 @@
 
 		}
 
-		public function prepareReadableValue($data, $entry_id = null, $truncate = false, $defaultValue = null) {
-			return $this->prepareTableValue($data, null, $entry_id);
-		}
-
-		public function prepareTableValue($data, XMLElement $link = null, $entry_id = null) {
+		public function prepareTextValue($data, $entry_id = null) {
 			if (!$entry_id) {
 				return;
 			}
@@ -92,7 +88,7 @@
 				->next();
 
 			if (!$entry) {
-				return parent::prepareTableValue(null, $link, $entry_id);
+				return null;
 			}
 			// build this entry fully
 			$entry = (new EntryManager)
@@ -110,6 +106,7 @@
 				->where(['parent_section' => $this->get('parent_section')])
 				->where(['sortorder' => ['>' => $this->get('sortorder')]])
 				->where(['show_column' => 'yes'])
+				->where(['type' => ['!=' => 'publish_tabs']])
 				->where(['id' => ['!=' => $this->get('id')]])
 				->orderBy('sortorder')
 				->limit(1)
@@ -117,7 +114,7 @@
 				->variable('id');
 
 			if (!$field_id) {
-				return parent::prepareTableValue(null, $link, $entry_id);
+				return null;
 			}
 
 			$field = (new FieldManager)
@@ -127,7 +124,7 @@
 				->next();
 
 			// get the first field's value as a substitute for the tab's return value
-			return $field->prepareTableValue($entry->getData($field_id), $link, $entry_id);
+			return $field->prepareTextValue($entry->getData($field_id), $entry_id);
 		}
 
 	}
