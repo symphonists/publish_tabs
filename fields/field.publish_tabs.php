@@ -20,16 +20,12 @@
 	-------------------------------------------------------------------------*/
 
 		public function createTable(){
-			return Symphony::Database()->query(
-				"CREATE TABLE IF NOT EXISTS `tbl_entries_data_" . $this->get('id') . "` (
-				  `id` int(11) unsigned NOT NULL auto_increment,
-				  `entry_id` int(11) unsigned NOT NULL,
-				  `value` double default NULL,
-				  PRIMARY KEY  (`id`),
-				  KEY `entry_id` (`entry_id`),
-				  KEY `value` (`value`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
-			);
+			return false;
+		}
+
+		public function requiresTable()
+		{
+			return false;
 		}
 
 	/*-------------------------------------------------------------------------
@@ -77,27 +73,58 @@
 
 		}
 
-		public function prepareReadableValue($data, $entry_id = NULL, $truncate = false, $defaultValue = NULL) {
-			return $this->prepareTableValue($data, null, $entry_id);
-		}
+		public function prepareTextValue($data, $entry_id = null) {
+			if (!$entry_id) {
+				return;
+			}
+			// Fetch entry
+			$entry = (new EntryManager)
+				->select([])
+				->projection(['e.id'])
+				->disableDefaultSort()
+				->entry($entry_id)
+				->section($this->get('parent_section'))
+				->execute()
+				->next();
 
-		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id=NULL) {
+			if (!$entry) {
+				return null;
+			}
 			// build this entry fully
-			$entries = EntryManager::fetch($entry_id);
-
-			if ($entries === false) return parent::prepareTableValue(NULL, $link, $entry_id);
-
-			$entry = reset(EntryManager::fetch($entry_id));
+			$entry = (new EntryManager)
+				->select()
+				->entry($entry_id)
+				->section($this->get('parent_section'))
+				->includeAllfields()
+				->execute()
+				->next();
 
 			// get the first field inside this tab
-			$field_id = Symphony::Database()->fetchVar('id', 0, "SELECT `id` FROM `tbl_fields` WHERE `parent_section` = '".$this->get('parent_section')."' AND `sortorder` = ".($this->get('sortorder') + 1)." ORDER BY `sortorder` LIMIT 1");
+			$field_id = Symphony::Database()
+				->select(['id'])
+				->from('tbl_fields')
+				->where(['parent_section' => $this->get('parent_section')])
+				->where(['sortorder' => ['>' => $this->get('sortorder')]])
+				->where(['show_column' => 'yes'])
+				->where(['type' => ['!=' => 'publish_tabs']])
+				->where(['id' => ['!=' => $this->get('id')]])
+				->orderBy('sortorder')
+				->limit(1)
+				->execute()
+				->variable('id');
 
-			if ($field_id === NULL) return parent::prepareTableValue(NULL, $link, $entry_id);
+			if (!$field_id) {
+				return null;
+			}
 
-			$field = FieldManager::fetch($field_id);
+			$field = (new FieldManager)
+				->select()
+				->field($field_id)
+				->execute()
+				->next();
 
-			// get the first field's value as a substitude for the tab's return value
-			return $field->prepareTableValue($entry->getData($field_id), $link, $entry_id);
+			// get the first field's value as a substitute for the tab's return value
+			return $field->prepareTextValue($entry->getData($field_id), $entry_id);
 		}
 
 	}

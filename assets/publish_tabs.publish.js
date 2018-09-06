@@ -19,7 +19,6 @@ Symphony.Language.add({
 
 		tab_controls: null,
 		new_entry: false,
-		sectionHandle: 'not-found',
 
 		init: function() {
 			var self = this;
@@ -30,9 +29,6 @@ Symphony.Language.add({
 			if (!tab_fields.length) return;
 
 			var body = $('body');
-
-			// isolate the section handle: this is use as a key for local storage
-			this.sectionHandle = /section-handle-[^\s]+/g.exec(body.attr('class'))[0];
 
 			body.addClass('publish-tabs');
 
@@ -74,7 +70,7 @@ Symphony.Language.add({
 					var id = t.attr('data-id');
 					if (t.hasClass('selected')) return;
 					if (!!id) {
-						self.showTab(id);
+						self.showTab(t);
 						// if it's a real user click
 						if (!!e.originalEvent) {
 							self.saveLocalTab('publish-tab', id);
@@ -92,58 +88,94 @@ Symphony.Language.add({
 			// append tags controls
 			context.append(this.tab_controls);
 
-			// selected the right tab
-			if (has_invalid_tabs) {
-				this.tab_controls.find('li.invalid:first').click();
+			// Init - Variables
+			var o = {
+				tabGroup: '.tab-group',
+				secTabGroup: '.secondary.column .tab-group',
+				priTabGroup: '.primary.column .tab-group',
+				columns: '.two.columns',
+				secColumn: '.secondary.column',
+				priColumn: '.primary.column',
+				contextTabs: '#context .tabs li'
+			};
+
+			// Init - Repartition of the divided tabs in the Primary Column
+			if($(o.secTabGroup).length){
+				$(o.secTabGroup).parents(o.columns).attr('class', '');
+
+				$(o.secTabGroup).each(function(){
+					var t = $(this);
+					var classes = t.attr('class').split(' ');
+
+					if($(o.priTabGroup+'.'+classes[1]).length) {
+						$('> .field, > .field-group', t).each(function(){
+							$(this).appendTo(o.priTabGroup+'.'+classes[1]);
+						});
+					} else {
+						var tID = classes[1].replace('tab-group-', '');
+						var prev = $(o.contextTabs+'[data-id="'+tID+'"]').prev();
+
+						if(prev.length) {
+							$(o.priTabGroup).eq(prev.index()).after(t);
+						} else {
+							t.prependTo(o.priColumn);
+						}
+					}
+				});
+
+				$(o.secTabGroup).remove();
+			}
+
+			// Init - Add a title to each Tab
+			$(o.contextTabs).each(function(){
+				var t = $(this);
+				var tID = t.attr('data-id');
+				var title = t.text();
+				$(o.priTabGroup+'.tab-group-'+tID).prepend('<h2>'+title+'</h2>');
+			});
+
+			// Init Scroll Events
+			self.updateTab();
+			$(window).on('scroll', function(){
+				self.updateTab();
+			}).on('resize', function(){
+				self.updateTab();
+			});
+		},
+
+		showTab: function(t) {
+			$('html, body').stop().animate({scrollTop: ($('.tab-group').eq(t.index()).offset().top - 119)}, 750);
+
+			return false;
+		},
+
+		updateTab: function() {
+			var o = {
+				tabGroup: '.tab-group',
+				contextTabs: '#context .tabs li'
+			};
+			var win = $(window);
+			var pageEnd = $(document).height() - win.height();
+			var curScroll = win.scrollTop();
+
+			if(curScroll == 0){
+				$(o.contextTabs).removeClass('selected');
+				if(win.width() < 1280) $(o.contextTabs + ':first-child').addClass('selected');
+				else $(o.contextTabs + ':nth-child(2)').addClass('selected');
+			} else if(curScroll == pageEnd){
+				$(o.contextTabs).removeClass('selected');
+				$(o.contextTabs + ':last-child').addClass('selected');
 			} else {
-				var initial_tab = self.getURLParameter('publish-tab');
-				var local_tab = self.getLocalTab('publish-tab');
+				$(o.tabGroup).each(function(){
+					var t = $(this);
 
-				var selector = !!initial_tab ? '.' + initial_tab : (!!local_tab ? local_tab : 'li:first');
-				this.tab_controls.find(selector).click();
+					if(curScroll + (win.height() / 2) > t.offset().top) {
+						$(o.contextTabs).removeClass('selected');
+						$(o.contextTabs).eq(t.index()).addClass('selected');
+					}
+				});
 			}
 		},
-
-		showTab: function(tab) {
-			var w = $('#contents').width();
-
-			// de-select current tab and select the new tab
-			this.tab_controls.find('li.selected').removeClass('selected');
-			this.tab_controls.find('li.tab-' + tab).addClass('selected');
-
-			// hide current tab group and select new group
-			$('.tab-group-selected').removeClass('tab-group-selected');
-			$('.tab-group-' + tab).addClass('tab-group-selected');
-
-			var invalid_field = $('.tab-group-' + tab + ' .invalid');
-			// focus first invalid element
-			if (invalid_field.length) {
-				invalid_field.eq(0).find('*[name*="fields["]').focus();
-			}
-			// focus first field in tab when creating a new entry
-			else if (this.new_entry) {
-				$('.tab-group-' + tab + ' .field:first *[name*="fields["]').focus();
-			}
-		},
-
-		getURLParameter: function(name) {
-			return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
-		},
-
-		generateLocalKey: function (name) {
-			if (!name) {
-				throw new Exception('A name must be given');
-			}
-			return 'symphony.' + name + '.' + this.sectionHandle;
-		},
-
-		getLocalTab: function (name) {
-			return localStorage[this.generateLocalKey(name)];
-		},
-
-		saveLocalTab: function (name, tab) {
-			localStorage[this.generateLocalKey(name)] = '.tab-' + tab;
-		}
 	};
 
 	$(function() {
