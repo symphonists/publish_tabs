@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension id="publish_tabs" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Publish Tabs</name>
-	<description>Add tabs grouped to entry forms</description>
+	<description>Add tab groups to entry forms</description>
 	<repo type="github">https://github.com/symphonists/publish_tabs</repo>
 	<url type="discuss">http://getsymphony.com/discuss/thread/49946/</url>
+	<url type="issues">https://github.com/symphonists/publish_tabs/issues</url>
 	<types>
 		<type>Interface</type>
 	</types>
@@ -21,9 +22,13 @@
 		</author>
 	</authors>
 	<media>
-		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry create/edit forms</item>
+		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry forms</item>
 	</media>
 	<releases>
+		<release version="1.3.2" date="2018-09-16" min="2.4" max="2.x.x">
+			- Marked as compatible with Symphony 2.7.x
+			- Added issues link
+		</release>
 		<release version="1.3.1" date="2015-02-02" min="2.4" max="2.6.x">
 			- Marked as compatible with Symphony 2.6.x
 			- Removed the field from the Data Source editor since it outputs nothing.

@@ -5,7 +5,7 @@ Do you have a gazillion fields in your section and the entry form has become too
 
 ## Installation
  
-1. Upload the `/publish_tabs` folder to your Symphony `/extensions`'` folder
+1. Upload the `/publish_tabs` folder to your Symphony `/extensions` folder
 2. Enable it by selecting "Publish Tabs" in the list, choose Enable from the with-selected menu, then click Apply
 3. When creating or editing a section you can add the "Publish Tab" field
 
