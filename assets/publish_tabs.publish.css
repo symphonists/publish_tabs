@@ -34,6 +34,8 @@ body.publish-tabs .column {
 
 #context > .tabs li {
 	box-sizing: border-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	position: relative;
 	color: #3B3D40;
 	font-size: 1.2rem;
@@ -46,8 +48,8 @@ body.publish-tabs .column {
 	cursor: pointer;
 }
 
-#context > .tabs li + li {
-	margin-left: 1rem;
+#context > .tabs li:last-child {
+	margin-right: 0;
 }
 
 #context > .tabs li:hover,
