@@ -71,10 +71,6 @@ Symphony.Language.add({
 					if (t.hasClass('selected')) return;
 					if (!!id) {
 						self.showTab(t);
-						// if it's a real user click
-						if (!!e.originalEvent) {
-							self.saveLocalTab('publish-tab', id);
-						}
 					}
 				});
 
