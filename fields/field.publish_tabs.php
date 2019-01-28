@@ -56,9 +56,7 @@
 		public function processRawFieldData($data, &$status, &$message = NULL, $simulate = false, $entry_id = NULL) {
 			$status = self::__OK__;
 
-			return array(
-				'value' => ''
-			);
+			return null;
 		}
 
 	/*-------------------------------------------------------------------------
