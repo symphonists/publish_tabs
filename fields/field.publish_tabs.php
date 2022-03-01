@@ -70,7 +70,7 @@
 	-------------------------------------------------------------------------*/
 
 		public function fetchIncludableElements() {
-			return null;
+			return array();
 		}
 
 		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = NULL, $entry_id = NULL) {
