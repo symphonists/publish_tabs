@@ -25,6 +25,9 @@
 		<item type="image" url="http://symphonyextensions.com/nickdunn/publish_tabs/media/publish_tabs.png">Publish Tabs: Add tab groups to entry forms</item>
 	</media>
 	<releases>
+		<release version="1.3.3" date="2022-02-01" min="2.4" max="2.x.x">
+			- Resolved conflict with Publish Tabs extension
+		</release>
 		<release version="1.3.2" date="2018-09-16" min="2.4" max="2.x.x">
 			- Marked as compatible with Symphony 2.7.x
 			- Added issues link
